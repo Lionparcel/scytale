@@ -47,7 +47,7 @@ public class Store extends ErrorHandler {
     private static final String PROVIDER_BC = "BC";
     private static final String PROVIDER_ANDROID_KEY_STORE = "AndroidKeyStore";
     private static final String DEFAULT_KEYSTORE_NAME = "keystore";
-    private static final char[] DEFAULT_KEYSTORE_PASSWORD = BuildConfig.APPLICATION_ID.toCharArray();
+    private static final char[] DEFAULT_KEYSTORE_PASSWORD = BuildConfig.LIBRARY_PACKAGE_NAME.toCharArray();
 
     private String mKeystoreName = DEFAULT_KEYSTORE_NAME;
     private char[] mKeystorePassword = DEFAULT_KEYSTORE_PASSWORD;
