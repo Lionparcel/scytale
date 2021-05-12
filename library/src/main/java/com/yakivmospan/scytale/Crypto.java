@@ -109,7 +109,7 @@ public class Crypto extends ErrorHandler {
 
             String encodedString = Base64.encodeToString(decodedData, Base64.DEFAULT);
             result += encodedString;
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException |
+        } catch (InterruptedException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException |
                 IllegalBlockSizeException | IOException e) {
             onException(e);
         }
@@ -174,17 +174,18 @@ public class Crypto extends ErrorHandler {
                 decodedData = decodeWithBuffer(cipher, encryptedData, mDecryptionBlockSize);
             }
             result = new String(decodedData, UTF_8);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | IOException | InvalidAlgorithmParameterException e) {
+        } catch (InterruptedException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | IOException | InvalidAlgorithmParameterException e) {
             onException(e);
         }
         return result;
     }
 
     private byte[] decode(@NonNull Cipher cipher, @NonNull byte[] plainData)
-            throws IOException, IllegalBlockSizeException, BadPaddingException {
+            throws IOException, InterruptedException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CipherOutputStream cipherOutputStream = new CipherOutputStream(baos, cipher);
         cipherOutputStream.write(plainData);
+        Thread.sleep(500);
         cipherOutputStream.close();
         return baos.toByteArray();
     }
